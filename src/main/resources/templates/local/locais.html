@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>locais</title>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+    <h1 class="title" style="color: darkgreen">Veggie Burger Estoque</h1>
+    <h2 class="card-subtitle" style="color: green">Locais</h2>
+    <table class="table">
+        <tr th:each="local:${locais}">
+            <td><a th:href="@{/estoque/}+${local.localId}" class="btn btn-success" th:text="${local.nome}"></a></td>
+        </tr>
+    </table>
+    <div>
+        <label class="title">Cadastrar novo local
+            <a href="/local/cadastrar" class="btn btn-primary">cadastrar</a>
+        </label>
+
+    </div>
+
+</body>
+</html>

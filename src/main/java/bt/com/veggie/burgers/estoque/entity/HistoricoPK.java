@@ -5,11 +5,11 @@ import java.util.Objects;
 
 public class HistoricoPK implements Serializable {
     private int historicoId;
-    private int produtoId;
+    private int produto;
 
     public HistoricoPK(int historicoId, int produtoId) {
         this.historicoId = historicoId;
-        this.produtoId = produtoId;
+        this.produto = produtoId;
     }
 
     public HistoricoPK() {
@@ -23,12 +23,12 @@ public class HistoricoPK implements Serializable {
         this.historicoId = historicoId;
     }
 
-    public int getProdutoId() {
-        return produtoId;
+    public int getProduto() {
+        return produto;
     }
 
-    public void setProdutoId(int produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto(int produtoId) {
+        this.produto = produtoId;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class HistoricoPK implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         HistoricoPK that = (HistoricoPK) o;
         return historicoId == that.historicoId &&
-                produtoId == that.produtoId;
+                produto == that.produto;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(historicoId, produtoId);
+        return Objects.hash(historicoId, produto);
     }
 }

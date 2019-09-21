@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>locais</title>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+    <h1 class="title" style="color: darkgreen">Veggie Burger Estoque</h1>
+    <h2 class="card-subtitle" style="color: green" th:text="Estoque + ${local}"></h2>
+    <table class="table">
+        <tr>
+            <th>Produto</th>
+            <th>Quatidade</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="prod:${produtos}">
+            <td th:text="${prod.nome}"></td>
+            <td th:text="${prod.quantidade}"></td>
+            <td></td>
+        </tr>
+    </table>
+    <div>
+        <label> Cadastrar novo produto
+            <a href="/produto/cadastrar" class="btn btn-primary">Cadastrar</a>
+        </label>
+        <label class="title"> Voltar para os locais
+            <a href="/locais" class="btn btn-primary">Voltar</a>
+        </label>
+    </div>
+</body>
+</html>

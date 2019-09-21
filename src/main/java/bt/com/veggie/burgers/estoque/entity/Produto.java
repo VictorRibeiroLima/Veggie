@@ -14,6 +14,8 @@ public class Produto{
     @Id
     @GeneratedValue(generator = "produto",strategy = GenerationType.SEQUENCE)
     private int produtoId;
+    @Column(name = "produto_nome",nullable = false)
+    private String nome;
     @Column(name = "produto_qtd",nullable = false)
     private int quantidade;
     @Column(name="produto_vldd")
@@ -25,6 +27,15 @@ public class Produto{
     private Local local;
     @OneToMany(mappedBy = "produto",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Historico> historicos = new ArrayList<Historico>();
+
+    public Produto(String nome, int quantidade, Calendar validade, Local local, List<Historico> historicos) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.validade = validade;
+        this.local = local;
+        this.historicos = historicos;
+    }
+
     public Produto() {
     }
 
@@ -37,6 +48,14 @@ public class Produto{
 
     public List<Historico> getHistoricos() {
         return historicos;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setHistoricos(List<Historico> historicos) {

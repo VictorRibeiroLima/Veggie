@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.naming.Name;
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 @Table(name = "TB_VG_HISTORICO")
@@ -27,7 +28,7 @@ public class Historico {
     private Calendar dataModificacao;
     @Column(name="historico_hr_modificacao")
     @Temporal(TemporalType.TIME)
-    private Calendar horaModificacao;
+    private Date horaModificacao;
     @Enumerated(EnumType.STRING)
     @Column(name="historico_tipo")
     private Tipo tipo;
@@ -35,7 +36,7 @@ public class Historico {
     public Historico() {
     }
 
-    public Historico(Produto produto, int valorAlterado, Calendar dataModificacao, Calendar horaModificacao, Tipo tipo) {
+    public Historico(Produto produto, int valorAlterado, Calendar dataModificacao, Date horaModificacao, Tipo tipo) {
         this.produto = produto;
         this.valorAlterado = valorAlterado;
         this.dataModificacao = dataModificacao;
@@ -75,11 +76,11 @@ public class Historico {
         this.dataModificacao = dataModificacao;
     }
 
-    public Calendar getHoraModificacao() {
+    public Date getHoraModificacao() {
         return horaModificacao;
     }
 
-    public void setHoraModificacao(Calendar horaModificacao) {
+    public void setHoraModificacao(Date horaModificacao) {
         this.horaModificacao = horaModificacao;
     }
 
