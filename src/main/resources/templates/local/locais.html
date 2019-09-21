@@ -10,7 +10,7 @@
     <h2 class="card-subtitle" style="color: green">Locais</h2>
     <table class="table">
         <tr th:each="local:${locais}">
-            <td><a th:href="@{/estoque/}+${local.localId}" class="btn btn-success" th:text="${local.nome}"></a></td>
+            <td><a th:href="@{'/estoque/'+${local.localId}}" class="btn btn-success" th:text="${local.nome}"></a></td>
         </tr>
     </table>
     <div>

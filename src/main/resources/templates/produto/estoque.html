@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <title>locais</title>
     <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
     <h1 class="title" style="color: darkgreen">Veggie Burger Estoque</h1>
-    <h2 class="card-subtitle" style="color: green" th:text="Estoque + ${local}"></h2>
+    <h2 class="card-subtitle" style="color: green" th:text="'Estoque ' + ${local.nome}"></h2>
+    <div class="alert alert-success"
+         th:if="${msg !=null}" th:text="${msg}"></div>
+
     <table class="table">
         <tr>
             <th>Produto</th>
@@ -19,16 +24,67 @@
         <tr th:each="prod:${produtos}">
             <td th:text="${prod.nome}"></td>
             <td th:text="${prod.quantidade}"></td>
-            <td></td>
+            <td><button th:onclick="|codigo.value = ${prod.produtoId}|" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modalAdd">
+                Entrada
+                </button></td>
+            <td><td><button th:onclick="|codigoBaixa.value = ${prod.produtoId}|" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modalRemove">
+                Baixa
+        </button></td>
         </tr>
     </table>
     <div>
         <label> Cadastrar novo produto
-            <a href="/produto/cadastrar" class="btn btn-primary">Cadastrar</a>
+            <a th:href="@{'/produto/cadastrar/'+${local.localId}}" class="btn btn-primary">Cadastrar</a>
         </label>
         <label class="title"> Voltar para os locais
             <a href="/locais" class="btn btn-primary">Voltar</a>
         </label>
+    </div>
+    <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Entrada</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form th:action="@{/produto/adicionar}" method="post">
+                    <div class="modal-body">
+                        <label>Numero de produtos que chegaram</label>
+                        <input type="number" name="valor">
+                        <input type="hidden" name="produtoId" id="codigo">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Dar Entrada</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Baixa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form th:action="@{/produto/remover}" method="post">
+                    <div class="modal-body">
+                        <label>Numero de produtos para dar baixa</label>
+                        <input type="number" name="valor">
+                        <input type="hidden" name="produtoId" id="codigoBaixa">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Dar Baixa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

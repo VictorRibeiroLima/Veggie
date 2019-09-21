@@ -20,7 +20,7 @@ public class Tela extends Application {
         VBox vBox = new VBox();
         vBox.getChildren().addAll(myWebView);
 
-        Scene scene = new Scene(vBox,800,800);
+        Scene scene = new Scene(vBox,600,600);
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(event -> fechar());
         primaryStage.show();
