@@ -12,7 +12,8 @@
     <h2 class="card-subtitle" style="color: green" th:text="'Estoque ' + ${local.nome}"></h2>
     <div class="alert alert-success"
          th:if="${msg !=null}" th:text="${msg}"></div>
-
+    <div class="alert alert-danger"
+         th:if="${msgErr !=null}" th:text="${msgErr}"></div>
     <table class="table">
         <tr>
             <th>Produto</th>
@@ -27,9 +28,12 @@
             <td><button th:onclick="|codigo.value = ${prod.produtoId}|" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modalAdd">
                 Entrada
                 </button></td>
-            <td><td><button th:onclick="|codigoBaixa.value = ${prod.produtoId}|" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modalRemove">
+            <td><button th:onclick="|codigoBaixa.value = ${prod.produtoId}|" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modalRemove">
                 Baixa
         </button></td>
+            <td><button th:href="'/historico/lista'+${prod.produtoId}" type="button" class="btn btn-outline-secondary btn-sm">
+                detalhes
+            </button></td>
         </tr>
     </table>
     <div>

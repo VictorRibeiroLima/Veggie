@@ -51,16 +51,22 @@ public class ProdutoController {
         }
     }
     @PostMapping("produto/adicionar")
-    public String adicionar(int produtoId,int valor){
+    public String adicionar(int produtoId,int valor,Model model){
         Produto produto = repository.findById(produtoId).get();
         produto.setQuantidade(produto.getQuantidade() + valor);
+        model.addAttribute("msg","Entrada feita com sucesso");
         repository.save(produto);
         return "redirect:/estoque/"+produto.getLocal().getLocalId();
     }
     @PostMapping("produto/remover")
-    public String remover(int produtoId,int valor){
+    public String remover(int produtoId,int valor,Model model){
         Produto produto = repository.findById(produtoId).get();
+        if(produto.getQuantidade() - valor < 0){
+            model.addAttribute("msgErr","Você não poder ter produtos negativos");
+            return "redirect:/estoque/"+produto.getLocal().getLocalId();
+        }
         produto.setQuantidade(produto.getQuantidade() - valor);
+        model.addAttribute("msg","Baixa feito com sucessso");
         repository.save(produto);
         return "redirect:/estoque/"+produto.getLocal().getLocalId();
     }

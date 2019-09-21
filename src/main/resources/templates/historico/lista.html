@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>locais</title>
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <h1 class="title" style="color: darkgreen">Veggie Burger Estoque</h1>
+    <h2 class="card-subtitle" style="color: green" th:text="'Historico '+${produto.nome}+' '+${produto.local.nome}"></h2>
+    <table class="table">
+        <tr>
+            <th>Nome</th>
+            <th>Quantidade</th>
+            <th>Validade</th>
+        </tr>
+        <tr>
+            <td th:text="${produto.nome}"></td>
+            <td th:text="${produto.quantidade}"></td>
+            <td th:text="${produto.validade}"></td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+            <th>Tipo alteração</th>
+            <th>Valor alterado</th>
+            <th>Data alteração</th>
+            <th>Hora alteração</th>
+        </tr>
+        <tr th:each="hist:${historicos}">
+            <td th:text="${hist.tipo}"></td>
+            <td th:text="${hist.valorAlterado}"></td>
+            <td th:text="${hist.dataModificacao}"></td>
+            <td th:text="${hist.horaModificacao}"></td>
+        </tr>
+    </table>
+    <label class="title"> Voltar para o estoque
+        <a th:href="'/estoque/'+${produto.local.localId}" class="btn btn-primary">Voltar</a>
+    </label>
+    <label class="title"> Excluir produto
+        <a th:href="'/estoque/'+${produto.local.localId}" class="btn btn-danger">Excluir</a>
+    </label>
+</body>
+</html>
