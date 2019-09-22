@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,14 +22,14 @@ public class Produto{
     @Column(name="produto_vldd")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
-    private Calendar validade;
+    private Date validade;
     @ManyToOne
     @JoinColumn(name = "local_id")
     private Local local;
     @OneToMany(mappedBy = "produto",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Historico> historicos = new ArrayList<Historico>();
 
-    public Produto(String nome, int quantidade, Calendar validade, Local local, List<Historico> historicos) {
+    public Produto(String nome, int quantidade, Date validade, Local local, List<Historico> historicos) {
         this.nome = nome;
         this.quantidade = quantidade;
         this.validade = validade;
@@ -39,7 +40,7 @@ public class Produto{
     public Produto() {
     }
 
-    public Produto(int quantidade, Calendar validade, Local local, List<Historico> historicos) {
+    public Produto(int quantidade, Date validade, Local local, List<Historico> historicos) {
         this.quantidade = quantidade;
         this.validade = validade;
         this.local = local;
@@ -81,11 +82,11 @@ public class Produto{
         this.quantidade = quantidade;
     }
 
-    public Calendar getValidade() {
+    public Date getValidade() {
         return validade;
     }
 
-    public void setValidade(Calendar validade) {
+    public void setValidade(Date validade) {
         this.validade = validade;
     }
 

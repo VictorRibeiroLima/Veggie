@@ -4,6 +4,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.naming.Name;
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,7 +27,7 @@ public class Historico {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     @Column(name = "historico_dt_modificacao")
-    private Calendar dataModificacao;
+    private Date dataModificacao;
     @Column(name="historico_hr_modificacao")
     @Temporal(TemporalType.TIME)
     private Date horaModificacao;
@@ -36,7 +38,7 @@ public class Historico {
     public Historico() {
     }
 
-    public Historico(Produto produto, int valorAlterado, Calendar dataModificacao, Date horaModificacao, Tipo tipo) {
+    public Historico(Produto produto, int valorAlterado, Date dataModificacao, Date horaModificacao, Tipo tipo) {
         this.produto = produto;
         this.valorAlterado = valorAlterado;
         this.dataModificacao = dataModificacao;
@@ -68,11 +70,13 @@ public class Historico {
         this.valorAlterado = valorAlterado;
     }
 
-    public Calendar getDataModificacao() {
+    public Date getDataModificacao() {
+        final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println(df.format(dataModificacao));
         return dataModificacao;
     }
 
-    public void setDataModificacao(Calendar dataModificacao) {
+    public void setDataModificacao(Date dataModificacao) {
         this.dataModificacao = dataModificacao;
     }
 

@@ -31,9 +31,9 @@
             <td><button th:onclick="|codigoBaixa.value = ${prod.produtoId}|" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modalRemove">
                 Baixa
         </button></td>
-            <td><button th:href="'/historico/lista'+${prod.produtoId}" type="button" class="btn btn-outline-secondary btn-sm">
-                detalhes
-            </button></td>
+            <form th:action="'/historico/lista/'+${prod.produtoId}" method="get">
+                <td><button type="submit" class="btn btn-outline-info btn-sm">Detalhes</button></td>
+            </form>
         </tr>
     </table>
     <div>

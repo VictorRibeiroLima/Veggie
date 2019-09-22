@@ -32,7 +32,7 @@
         <tr th:each="hist:${historicos}">
             <td th:text="${hist.tipo}"></td>
             <td th:text="${hist.valorAlterado}"></td>
-            <td th:text="${hist.dataModificacao}"></td>
+            <td th:text="${#dates.format(hist.dataModificacao, 'dd/MM/yyyy')}"></td>
             <td th:text="${hist.horaModificacao}"></td>
         </tr>
     </table>
@@ -40,7 +40,32 @@
         <a th:href="'/estoque/'+${produto.local.localId}" class="btn btn-primary">Voltar</a>
     </label>
     <label class="title"> Excluir produto
-        <a th:href="'/estoque/'+${produto.local.localId}" class="btn btn-danger">Excluir</a>
+        <button th:onclick="|codigoBaixa.value = ${produto.produtoId}|" type="button" class="btn btn-danger " data-toggle="modal" data-target="#modalRemove">
+            Excluir
+        </button>
     </label>
+    <div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Excluir</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form th:action="@{/produto/excluir}" method="post">
+                    <p class="alert-danger">Você esta prestes a excluir um produto,isso resultara na exclusão de todo seu historico,
+                        deseja mesmo fazer isso?</p>
+                    <div class="modal-body">
+                        <input type="hidden" name="produtoId" id="codigoBaixa">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

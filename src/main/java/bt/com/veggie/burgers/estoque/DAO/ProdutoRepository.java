@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ProdutoRepository extends JpaRepository<Produto,Integer> {
-    public List<Produto> findAllByLocal(Local local);
+    public List<Produto> findAllByLocalOrderByNomeAsc(Local local);
 }
