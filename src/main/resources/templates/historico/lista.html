@@ -36,6 +36,12 @@
             <td th:text="${hist.horaModificacao}"></td>
         </tr>
     </table>
+    </hr>
+    <ul class="nav nav-pills">
+        <li class="nav-item" th:if="${historicos.totalPages>0}" th:each="i :${#numbers.sequence(0,historicos.totalPages-1)}">
+            <a th:href="'/historico/lista/'+${produto.produtoId}+'?page='+${i}" th:text="${i}" class="nav-link"></a>
+        </li>
+    </ul>
     <label class="title"> Voltar para o estoque
         <a th:href="'/estoque/'+${produto.local.localId}" class="btn btn-primary">Voltar</a>
     </label>

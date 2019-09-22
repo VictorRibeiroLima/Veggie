@@ -36,6 +36,12 @@
             </form>
         </tr>
     </table>
+    </hr>
+    <ul class="nav nav-pills">
+        <li class="nav-item" th:if="${produtos.totalPages>0}" th:each="i :${#numbers.sequence(0,produtos.totalPages-1)}">
+            <a th:href="'/estoque/'+${local.localId}+'?page='+${i}" th:text="${i}" class="nav-link"></a>
+        </li>
+    </ul>
     <div>
         <label> Cadastrar novo produto
             <a th:href="@{'/produto/cadastrar/'+${local.localId}}" class="btn btn-primary">Cadastrar</a>

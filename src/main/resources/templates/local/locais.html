@@ -18,7 +18,7 @@
         <tr th:each="local:${locais}">
             <td><a th:href="@{'/estoque/'+${local.localId}}" class="btn btn-success" th:text="${local.nome}"></a></td>
             <td><button th:onclick="|localId.value=${local.localId}|" type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modal">
-                Baixa
+                Excluir
             </button></td>
         </tr>
     </table>

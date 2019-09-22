@@ -8,6 +8,8 @@ import bt.com.veggie.burgers.estoque.entity.Local;
 import bt.com.veggie.burgers.estoque.entity.Produto;
 import bt.com.veggie.burgers.estoque.entity.Tipo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,11 +30,11 @@ public class ProdutoController {
     @Autowired
     private HistoricoRepository historicoRepository;
     @GetMapping("estoque/{Id}")
-    public String estoque(Model model, @PathVariable("Id") String localId){
+    public String estoque(Model model, @PathVariable("Id") String localId,@PageableDefault(size = 5,value = 5) Pageable pageable){
         System.out.println("Estoque "+ localId);
         Local local = localRepository.findById(Integer.parseInt(localId)).get();
         System.out.println(local.getNome());
-        model.addAttribute("produtos",repository.findAllByLocalOrderByNomeAsc(local));
+        model.addAttribute("produtos",repository.findAllByLocalOrderByNomeAsc(local,pageable));
         model.addAttribute("local",local);
         return "produto/estoque";
     }
