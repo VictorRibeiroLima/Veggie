@@ -8,6 +8,9 @@
 <body>
     <h1 class="title" style="color: darkgreen">Veggie Burger Estoque</h1>
     <h2 class="card-subtitle" style="color: green">Cadastro de locais</h2>
+    <div class="alert alert-danger"
+         th:if="${msgE !=null}" th:text="${msgE}"></div>
+    <table class="table">
     <form th:action="@{/local/cadastrar}" th:object="${local}" method="post">
         <div class="form-group">
             <label for="nome">Nome</label>

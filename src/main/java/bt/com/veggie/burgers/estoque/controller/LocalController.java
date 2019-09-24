@@ -26,6 +26,10 @@ public class LocalController {
     }
     @PostMapping("local/cadastrar")
     public String cadastrar(RedirectAttributes redirectAttributes, Local local){
+        if(local.getNome().isEmpty()){
+            redirectAttributes.addFlashAttribute("msgE","Você precisa preencher um nome para o local");
+            return "redirect:/local/cadastrar";
+        }
         local.setNome(local.getNome().substring(0, 1).toUpperCase() + local.getNome().substring(1).toLowerCase());
         redirectAttributes.addFlashAttribute("msgS","Cadastrado");
         repository.save(local);
