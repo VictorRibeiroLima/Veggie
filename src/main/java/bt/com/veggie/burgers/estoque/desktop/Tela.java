@@ -20,10 +20,11 @@ public class Tela extends Application {
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(myWebView);
-
+        Image image = new Image("icons/veggie.png");
         Scene scene = new Scene(vBox,700,700);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Veggie Burgers Estoque");
+        primaryStage.getIcons().add(image);
         primaryStage.setOnCloseRequest(event -> fechar());
         primaryStage.show();
     }

@@ -8,7 +8,7 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-    <h1 class="title" style="color: darkgreen">Veggie Burger Estoque</h1>
+    <h1 class="title" style="color: darkgreen">Veggie Burgers Estoque</h1>
     <h2 class="card-subtitle" style="color: green" th:text="'Historico '+${produto.nome}+' '+${produto.local.nome}"></h2>
     <table class="table">
         <tr>
@@ -19,7 +19,7 @@
         <tr>
             <td th:text="${produto.nome}"></td>
             <td th:text="${produto.quantidade}"></td>
-            <td th:text="${produto.validade}"></td>
+            <td th:text="${#dates.format(produto.validade,'dd/MM/yyyy')}"></td>
         </tr>
     </table>
     <table class="table">

@@ -12,10 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
@@ -44,15 +41,22 @@ public class ProdutoController {
         model.addAttribute("local",localId);
         return "produto/cadastro";
     }
+    @ExceptionHandler(org.springframework.validation.BindException.class)
+    public String error(RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("msgE","O formato da data deve ser dd/mm/aaaa");
+        return "redirect:/locais";
+    }
     @PostMapping("produto/cadastrar")
     public String cadastro(RedirectAttributes redirectAttribute, Produto produto,String localId){
+        System.out.println(produto.getValidade().toInstant().toString().substring(0,4));
         if(!produto.getNome().isEmpty()) {
             produto.setNome(produto.getNome().substring(0, 1).toUpperCase() + produto.getNome().substring(1).toLowerCase());
             produto.setLocal(localRepository.findById(Integer.parseInt(localId)).get());
             redirectAttribute.addFlashAttribute("msg", "produto cadastrado");
             repository.save(produto);
-            return "redirect:/estoque/"+localId;
-        }else{
+            return "redirect:/estoque/" + localId;
+        }
+        else{
             redirectAttribute.addFlashAttribute("msg", "Nome é um campo obrigatorio");
             return "redirect:/produto/cadastrar/"+localId;
         }
